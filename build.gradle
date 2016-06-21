@@ -1,0 +1,42 @@
+plugins {
+    id 'org.spongepowered.plugin' version '0.6'
+}
+
+allprojects {
+	group = 'fr.evercraft'
+    version = '1.2-BETA'
+}
+
+subprojects {
+    apply plugin: 'java'
+	apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+
+    repositories {
+		mavenCentral()
+		maven {
+			name = 'sponge'
+			url = 'http://repo.spongepowered.org/maven'
+		}
+	}
+	
+	jar {
+		manifest {
+			attributes 'Implementation-Title': name,
+					   'Implementation-Version': version
+		}
+	}
+	
+	dependencies {
+		compile "org.spongepowered:spongeapi:5.0.0-SNAPSHOT"
+	}
+	
+	libsDirName = new File(rootProject.projectDir, "plugins")
+}
+
+configure(subprojects.findAll {it.name != "EverAPI"}) {
+	dependencies {
+        compile project(":EverAPI")
+    }
+}

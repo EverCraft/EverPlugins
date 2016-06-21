@@ -1,0 +1,6 @@
+[submodule "EverAPI"]
+	path = EverAPI
+	url = git@github.com:EverCraft/EverAPI.git
+[submodule "EverChat"]
+	path = EverChat
+	url = git@github.com:EverCraft/EverChat.git

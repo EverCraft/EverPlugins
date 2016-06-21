@@ -1,0 +1,3 @@
+rootProject.name = "EverPlugins"
+
+include 'EverAPI', 'EverChat'
