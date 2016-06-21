@@ -4,3 +4,24 @@
 [submodule "EverChat"]
 	path = EverChat
 	url = git@github.com:EverCraft/EverChat.git
+[submodule "EverEssentials"]
+	path = EverEssentials
+	url = git@github.com:EverCraft/EverEssentials.git
+[submodule "EverEconomy"]
+	path = EverEconomy
+	url = git@github.com:EverCraft/EverEconomy.git
+[submodule "EverMails"]
+	path = EverMails
+	url = git@github.com:EverCraft/EverMails.git
+[submodule "EverPermissions"]
+	path = EverPermissions
+	url = git@github.com:EverCraft/EverPermissions.git
+[submodule "EverPVP"]
+	path = EverPVP
+	url = git@github.com:EverCraft/EverPVP.git
+[submodule "EverStats"]
+	path = EverStats
+	url = git@github.com:EverCraft/EverStats.git
+[submodule "EverInformations"]
+	path = EverInformations
+	url = git@github.com:EverCraft/EverInformations.git
