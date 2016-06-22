@@ -7,6 +7,7 @@ plugins {
 allprojects {
 	group = 'fr.evercraft'
     version = '1.2-BETA'
+    organization = 'EverCraft'
 }
 
 subprojects {
@@ -36,11 +37,31 @@ subprojects {
 	
 	libsDirName = new File(rootProject.projectDir, "plugins")
 	
+	apply plugin: 'net.minecrell.licenser'
+	
+	processResources {
+	    from 'HEADER.txt'
+	}
+		
 	license {
-	    header = project.file('HEADER.txt')
+	    header = file('HEADER.txt')
 	    include '**/*.java'
-	    style {
-	        java = 'JAVADOC' // Sets Java license header style to JAVADOC (/**)
+	    ignoreFailures = true
+	    newLine = false // Disables the new line
+	    ext {
+	        name = project.name
+	        organization = project.organization
+	        url = project.url
+	    }
+	}
+	
+	sponge {
+	    plugin {
+	        meta {
+	        	id = "$project.group.$project.name"
+	            name = "$project.name"
+	            version = "$project.version"
+	        }
 	    }
 	}
 }
