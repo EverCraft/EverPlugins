@@ -1,3 +1,3 @@
 rootProject.name = "EverPlugins"
 
-include 'EverAPI', 'EverChat', 'EverEconomy', 'EverEssentials', 'EverInformations', 'EverMails', 'EverPermissions', 'EverPVP', 'EverStats'
+include 'EverAPI', 'EverChat', 'EverCooldowns', 'EverEconomy', 'EverEssentials', 'EverInformations', 'EverMails', 'EverPermissions', 'EverPVP', 'EverStats'

@@ -4,6 +4,8 @@ plugins {
     id 'net.minecrell.licenser' version '0.2.1'
 }
 
+ext.api = project
+
 allprojects {
 	group = 'fr.evercraft'
     version = '1.2-BETA'
@@ -44,7 +46,7 @@ subprojects {
 	}
 		
 	license {
-	    header = file('HEADER.txt')
+	    header = api.file('HEADER.txt')
 	    include '**/*.java'
 	    ignoreFailures = true
 	    newLine = false // Disables the new line
