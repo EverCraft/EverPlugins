@@ -28,3 +28,6 @@
 [submodule "EverCooldowns"]
 	path = EverCooldowns
 	url = git@github.com:EverCraft/EverCooldowns.git
+[submodule "EverKits"]
+	path = EverKits
+	url = git@github.com:EverCraft/EverKits
