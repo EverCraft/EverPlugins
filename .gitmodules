@@ -31,3 +31,9 @@
 [submodule "EverKits"]
 	path = EverKits
 	url = git@github.com:EverCraft/EverKits
+[submodule "EverSigns"]
+	path = EverSigns
+	url = git@github.com:EverCraft/EverSigns
+[submodule "EverSanctions"]
+	path = EverSanctions
+	url = git@github.com:EverCraft/EverSanctions
