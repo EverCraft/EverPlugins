@@ -37,3 +37,6 @@
 [submodule "EverSanctions"]
 	path = EverSanctions
 	url = git@github.com:EverCraft/EverSanctions
+[submodule "EverWorldGuard"]
+	path = EverWorldGuard
+	url = git@github.com:EverCraft/EverWorldGuard
