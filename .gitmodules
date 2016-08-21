@@ -40,3 +40,6 @@
 [submodule "EverWorldGuard"]
 	path = EverWorldGuard
 	url = git@github.com:EverCraft/EverWorldGuard
+[submodule "EverWorlds"]
+	path = EverWorlds
+	url = git@github.com:EverCraft/EverWorlds
