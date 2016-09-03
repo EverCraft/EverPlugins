@@ -74,6 +74,12 @@ configure(subprojects.findAll {it.name != "EverAPI"}) {
     }
 }
 
+project(':EverAPI') {
+	dependencies {
+		compile "io.netty:netty-all:4.0.23.Final"
+	}
+}
+
 project(':EverMails') {
 	apply plugin: 'com.github.johnrengelman.shadow'
 
