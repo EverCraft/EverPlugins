@@ -34,7 +34,8 @@ subprojects {
 	}
 	
 	dependencies {
-		compile "org.spongepowered:spongeapi:5.0.0-SNAPSHOT"
+		//compile "org.spongepowered:spongeapi:5.0.0"
+		compile project(':SpongeAPI')
 	}
 	
 	libsDirName = new File(rootProject.projectDir, "plugins")
