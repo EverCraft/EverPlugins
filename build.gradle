@@ -12,7 +12,8 @@ allprojects {
     organization = 'EverCraft'
 }
 
-subprojects {
+configure(subprojects.findAll {it.name != "SpongeAPI"}) {
+	apply plugin: 'groovy'
     apply plugin: 'java'
 	apply plugin: 'eclipse'
     apply plugin: 'idea'
@@ -26,16 +27,16 @@ subprojects {
 		}
 	}
 	
+	dependencies {
+		//compile "org.spongepowered:spongeapi:6.0.0-SNAPSHOT"
+		compile project(':SpongeAPI')
+	}
+	
 	jar {
 		manifest {
 			attributes 'Implementation-Title': name,
 					   'Implementation-Version': version
 		}
-	}
-	
-	dependencies {
-		//compile "org.spongepowered:spongeapi:5.0.0"
-		compile project(':SpongeAPI')
 	}
 	
 	libsDirName = new File(rootProject.projectDir, "plugins")
@@ -69,7 +70,7 @@ subprojects {
 	}
 }
 
-configure(subprojects.findAll {it.name != "EverAPI"}) {
+configure(subprojects.findAll {it.name != "EverAPI" && it.name != "SpongeAPI"}) {
 	dependencies {
         compile project(":EverAPI")
     }
