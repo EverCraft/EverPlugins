@@ -1,4 +1,4 @@
-EverAPI
+EverWorldGuard
 =============
 
 A minecraft plugin for Sponge platforms.
@@ -19,5 +19,5 @@ This plugin is licensed under [GNU License](https://github.com/EverCraft/EverAPI
 ## Clone ##
 The following steps will ensure your project is cloned properly
 
-1. `git clone git@github.com:EverCraft/EverAPI.git`
-2. `cd EverAPI`
+1. `git clone --recurse git@github.com:EverCraft/EverPlugins.git`
+2. `cd EverPlugins`
