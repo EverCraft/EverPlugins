@@ -1,7 +1,7 @@
 plugins {
     id 'org.spongepowered.plugin' version '0.6'
     id "com.github.johnrengelman.shadow" version "1.2.3"
-    id 'net.minecrell.licenser' version '0.2.1'
+    id 'net.minecrell.licenser' version '0.3'
 }
 
 ext.everplugins = project
@@ -28,8 +28,8 @@ configure(subprojects.findAll {it.name != "SpongeAPI"}) {
 	}
 	
 	dependencies {
-		//compile "org.spongepowered:spongeapi:6.0.0-SNAPSHOT"
-		compile project(':SpongeAPI')
+		compile "org.spongepowered:spongeapi:6.0.0-SNAPSHOT"
+		//compile project(':SpongeAPI')
 	}
 	
 	jar {
