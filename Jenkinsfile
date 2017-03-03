@@ -1,5 +1,5 @@
 node {
-	currentBuild.displayName = "bleeding"
+	currentBuild.displayName = "SpongeAPI 6.0 - ${env.BUILD_NUMBER}"
     currentBuild.description = "For SpongeAPI 6.0"
 
 	stage 'Stage Checkout'
