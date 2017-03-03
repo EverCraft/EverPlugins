@@ -1,5 +1,6 @@
 node {
 	currentBuild.displayName = "EverPlugins #${env.BUILD_NUMBER} - SpongeAPI 6.0"
+	currentBuild.description = "For SpongeAPI 6.0"
 
 	stage 'Stage Checkout'
 	
