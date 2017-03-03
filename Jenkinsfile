@@ -1,6 +1,5 @@
 node {
-	currentBuild.displayName = "SpongeAPI 6.0 - ${env.BUILD_NUMBER}"
-    currentBuild.description = "For SpongeAPI 6.0"
+	currentBuild.displayName = "EverPlugins ${env.BUILD_NUMBER} - SpongeAPI 6.0"
 
 	stage 'Stage Checkout'
 	
@@ -18,3 +17,8 @@ node {
 	archive 'build/plugins/*.zip'
 
 }
+
+item = Jenkins.instance.getItemByFullName("EverPlugins")
+item.setDescription("For SpongeAPI 6.0")
+item.save()
+item.renameTo("SpongeAPI 6.0")

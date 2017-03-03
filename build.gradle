@@ -6,7 +6,7 @@ plugins {
 
 ext.everplugins = project
 
-version = '0.1.3-BETA'
+version = 'S6.0-R0.1.3-BETA'
 if (project.hasProperty("BUILD_NUMBER")) {
 	version = version + '-' + project.property("BUILD_NUMBER")
 }
