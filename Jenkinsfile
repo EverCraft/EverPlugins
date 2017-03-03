@@ -1,4 +1,7 @@
 node {
+	currentBuild.displayName = "bleeding"
+    currentBuild.description = "For SpongeAPI 6.0"
+
 	stage 'Stage Checkout'
 	
 	checkout scm
