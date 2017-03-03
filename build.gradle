@@ -115,6 +115,6 @@ task zip(type: Zip) {
     from "build/plugins"
 	include '*.jar'
 	
-    into('EverPlugins-' + everplugins.version)
+    archiveName 'All-EverPlugins-' + everplugins.version + ".zip"
 	destinationDir file('build/plugins')
 }
