@@ -110,3 +110,11 @@ project(':EverMails') {
 	  	}
 	}
 }
+
+task zip(type: Zip) {
+    from "build/plugins"
+	include '*.jar'
+	
+    into('EverPlugins-' + everplugins.version)
+	destinationDir file('build/plugins')
+}
