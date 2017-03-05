@@ -87,6 +87,20 @@ project(':EverAPI') {
 	}
 }
 
+project(':EverChat') {
+	repositories {
+		mavenCentral()
+		maven {
+			name = 'sponge'
+			url = 'http://repo.spongepowered.org/maven'
+		}
+	}
+
+	dependencies {
+		compile "org.spongepowered:spongecommon:6.0.0-SNAPSHOT:dev"
+	}
+}
+
 project(':EverMails') {
 	apply plugin: 'com.github.johnrengelman.shadow'
 
