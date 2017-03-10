@@ -119,7 +119,7 @@ project(':EverAPI') {
 
 	genEventImpl {
 	    // The full qualified class name of the factory
-	    outputFactory = 'fr.evercraft.everapi.event.RexbutEvent'
+	    outputFactory = 'fr.evercraft.everapi.event.ESpongeEventFactory'
 	    // The path to your event interfaces
 	    include 'src/main/java/fr/evercraft/everapi/event/*'
 	}*/
