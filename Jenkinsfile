@@ -2,7 +2,7 @@ node {
 	currentBuild.displayName = "EverPlugins #${env.BUILD_NUMBER} - SpongeAPI 6.0.0"
 	currentBuild.description = "For SpongeAPI 6.0.0"
 	
-	def server = Artifactory.newServer url: SERVER_URL, credentialsId: CREDENTIALS
+	def server = Artifactory.newServer url: 'EverCraft', credentialsId: 'repo.evercraft.fr'
     	def rtGradle = Artifactory.newGradleBuild()
 	def buildInfo = Artifactory.newBuildInfo()
 
