@@ -1,10 +1,20 @@
-plugins {
-    id 'org.spongepowered.plugin' version '0.6'
-    id "com.github.johnrengelman.shadow" version "1.2.3"
-    id 'net.minecrell.licenser' version '0.3'
-    //id 'org.spongepowered.event-impl-gen' version '5.0.2'
+buildscript {
+  repositories {
+	jcenter()
+	dependencies {
+	  classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.+')
+	}
+  }
 }
 
+plugins {
+	id 'org.spongepowered.plugin' version '0.6'
+	id "com.github.johnrengelman.shadow" version "1.2.3"
+	id 'net.minecrell.licenser' version '0.3'
+	//id 'org.spongepowered.event-impl-gen' version '5.0.2'
+}
+
+// Arguments :
 ext.plugin_version = "0.1.4"
 ext.spongeapi_version = "6.0.0"
 ext.everplugins = project
@@ -14,24 +24,33 @@ if (project.hasProperty("BUILD_NUMBER")) {
 	version = version + '-' + project.property("BUILD_NUMBER")
 }
 
+ext.artifactory_user = "admin"
+ext.artifactory_password = ""
+if (project.hasProperty("USER")) {
+	ext.artifactory_user = project.property("USER")
+}
+if (project.hasProperty("PASSWORD")) {
+	ext.artifactory_password = project.property("PASSWORD")
+}
+
 allprojects {
 	group = 'fr.evercraft'
-    version = everplugins.version
-    organization = 'EverCraft'
+	version = everplugins.version
+	organization = 'EverCraft'
+	apply plugin: 'idea'
 }
 
 // Default tasks
 defaultTasks 'licenseFormat', 'build', 'shadowJar'
 
 
-configure(subprojects.findAll {it.name != "SpongeAPI"}) {
+configure(subprojects.findAll {it.name != "SpongeAPI" && it.name != "EverPlugins"}) {
 	apply plugin: 'groovy'
-    apply plugin: 'java'
 	apply plugin: 'eclipse'
-    apply plugin: 'idea'
-    apply plugin: 'maven'
+	apply plugin: 'maven'
+	apply plugin: 'java'
 
-    repositories {
+	repositories {
 		mavenCentral()
 		maven {
 			name = 'sponge'
@@ -41,6 +60,7 @@ configure(subprojects.findAll {it.name != "SpongeAPI"}) {
 	
 	dependencies {
 		compile "org.spongepowered:spongeapi:" + spongeapi_version + "-SNAPSHOT"
+		testCompile 'junit:junit:4.7'
 		//compile project(':SpongeAPI')
 	}
 	
@@ -56,29 +76,29 @@ configure(subprojects.findAll {it.name != "SpongeAPI"}) {
 	apply plugin: 'net.minecrell.licenser'
 	
 	processResources {
-	    from 'HEADER.txt'
+		from 'HEADER.txt'
 	}
 		
 	license {
-	    header = everplugins.file('HEADER.txt')
-	    include '**/*.java'
-	    ignoreFailures = true
-	    newLine = false // Disables the new line
-	    ext {
-	        name = project.name
-	        organization = project.organization
-	        url = project.url
-	    }
+		header = everplugins.file('HEADER.txt')
+		include '**/*.java'
+		ignoreFailures = true
+		newLine = false // Disables the new line
+		ext {
+			name = project.name
+			organization = project.organization
+			url = project.url
+		}
 	}
 	
 	sponge {
-	    plugin {
-	        meta {
-	        	id = "$project.group.$project.name"
-	            name = "$project.name"
-	            version = "$project.version"
-	        }
-	    }
+		plugin {
+			meta {
+				id = "$project.group.$project.name"
+				name = project.name
+				version = project.version
+			}
+		}
 	}
 }
 
@@ -86,57 +106,99 @@ task('setupDecompWorkspace', dependsOn: 'genEventImpl')
 
 configure(subprojects.findAll {it.name != "EverAPI" && it.name != "SpongeAPI"}) {
 	dependencies {
-        compile project(":EverAPI")
-    }
+		compile project(":EverAPI")
+	}
 }
 
-project(':EverAPI') {	
+project(':EverAPI') {
+	apply plugin: 'com.jfrog.artifactory'
+	
 	dependencies {
 		compile "io.netty:netty-all:4.0.23.Final"
 	}
 	
+	// Replace
 	def versionFile =  'src/main/java/fr/evercraft/everapi/EverAPI.java'
 	def tempDir = 'build/tmp/sourcesCache'
 	def versionFileName = 'EverAPI.java'
-	
 	compileJava.doFirst {
-	    copy {
-	        from(versionFile)
-	        into(tempDir)
-	    }
-	    ant.replace(file: versionFile, token: '{EVERPLUGINS_VERSION}', value: plugin_version)
-	    ant.replace(file: versionFile, token: '{SPONGEAPI_VERSION}', value: spongeapi_version + "-SNAPSHOT")
+		copy {
+			from(versionFile)
+			into(tempDir)
+		}
+		ant.replace(file: versionFile, token: '{EVERPLUGINS_VERSION}', value: plugin_version)
+		ant.replace(file: versionFile, token: '{SPONGEAPI_VERSION}', value: spongeapi_version + "-SNAPSHOT")
 	}
-	
 	compileJava.doLast {
-	    copy {
-	        from(tempDir + '/' + versionFileName)
-	        into(project.file(versionFile).parent)
-	    }
+		copy {
+			from(tempDir + '/' + versionFileName)
+			into(project.file(versionFile).parent)
+		}
 	}
 	
+	// jFrog
+	configurations {
+		published
+	}
+	task sourceJar(type: Jar) {
+		from sourceSets.main.allSource
+		classifier = 'sources'
+	}
+	artifactoryPublish {
+		dependsOn sourceJar
+	}
+	artifacts {
+		published sourceJar
+	}
+	artifactory {
+		contextUrl = 'http://repo.evercraft.fr/artifactory'
+		publish {
+			repository {
+				repoKey = 'Minecraft'
+				username = "${artifactory_user}"
+				password = "${artifactory_password}"
+			}
+		}
+		publish {
+			defaults {
+				publishConfigs('archives', 'published')
+				properties = ['qa.level': 'basic', 'dev.team' : 'core']
+				properties {
+					all '*:*:1.*:*@*', key1: 'val1', key2: 'val2'
+					all 'org.jfrog.*:*:1.*:*@jar*', key3: 'val3', key4: 'val4'
+				}
+		  		publishPom = true
+		  		publishIvy = false
+			}
+	  	}
+	  	resolve {
+			repository {
+			  	repoKey = 'jcenter'
+			  	maven = true	 
+			}
+	  	}
+	}
+	
+	// Event
 	/*apply plugin: 'org.spongepowered.event-impl-gen'
-
 	genEventImpl {
-	    // The full qualified class name of the factory
-	    outputFactory = 'fr.evercraft.everapi.event.ESpongeEventFactory'
-	    // The path to your event interfaces
-	    include 'src/main/java/fr/evercraft/everapi/event/*'
+		// The full qualified class name of the factory
+		outputFactory = 'fr.evercraft.everapi.event.ESpongeEventFactory'
+		// The path to your event interfaces
+		include 'src/main/java/fr/evercraft/everapi/event/*'
 	}*/
 }
 
+// Include Javax
 project(':EverMails') {
 	apply plugin: 'com.github.johnrengelman.shadow'
-
 	configurations {
-    	shadow
+		shadow
 	}
-
 	dependencies {
 		compile 'javax.mail:mail:1.4.7'
 		shadow 'javax.mail:mail:1.4.7'
 	}
-	
 	shadowJar {
 		baseName = project.name
 	   	classifier = null
@@ -144,15 +206,16 @@ project(':EverMails') {
 	
 		configurations += [project.configurations.shadow]
 	  	dependencies {
-	    	include(dependency('javax.mail:mail:1.4.7'))
+			include(dependency('javax.mail:mail:1.4.7'))
 	  	}
 	}
 }
 
+// Jenkins
 task zip(type: Zip) {
-    from "build/plugins"
+	from "build/plugins"
 	include '*.jar'
 	
-    archiveName 'All-EverPlugins-' + everplugins.version + ".zip"
+	archiveName 'All-EverPlugins-' + everplugins.version + ".zip"
 	destinationDir file('build/plugins')
 }
