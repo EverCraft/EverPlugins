@@ -1,4 +1,4 @@
-EverWorldGuard
+EverPlguins
 =============
 
 A minecraft plugin for Sponge platforms.
@@ -6,7 +6,7 @@ A minecraft plugin for Sponge platforms.
 ## Links ##
 * [Download](http://ci.evercraft.fr/job/EverCraft/job/EverPlugins/)
 * [Wiki](http://wiki.evercraft.fr)
-* [Issues](https://github.com/EverCraft/EverAPI/issues)
+* [Issues](https://github.com/EverCraft/EverPlugins/issues)
 * [Website](http://evercraft.fr)
 * [Support Me](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RUSKPBMNJG5R4)
 
