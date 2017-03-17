@@ -1,4 +1,4 @@
-EverPlguins
+EverPlugins
 =============
 
 A minecraft plugin for Sponge platforms.
