@@ -36,16 +36,16 @@ allprojects {
 	group = 'fr.evercraft'
 	version = everplugins.version
 	organization = 'EverCraft'
-	apply plugin: 'idea'
 }
 
 // Default tasks
-defaultTasks 'licenseFormat', 'build', 'shadowJar'
+defaultTasks 'clean', 'licenseFormat', 'build', 'shadowJar'
 
 
 configure(subprojects.findAll {it.name != "SpongeAPI" && it.name != "EverPlugins"}) {
 	apply plugin: 'groovy'
 	apply plugin: 'eclipse'
+	apply plugin: 'idea'
 	apply plugin: 'maven'
 	apply plugin: 'java'
 
@@ -198,6 +198,10 @@ project(':EverMails') {
 			include(dependency('javax.mail:mail:1.4.7'))
 	  	}
 	}
+}
+
+task clean {
+    delete "${buildDir}"
 }
 
 // Jenkins
