@@ -8,7 +8,6 @@ buildscript {
 }
 
 plugins {
-	id 'org.spongepowered.plugin' version '0.6'
 	id "com.github.johnrengelman.shadow" version "1.2.3"
 	id 'net.minecrell.licenser' version '0.3'
 	//id 'org.spongepowered.event-impl-gen' version '5.0.2'
@@ -88,16 +87,6 @@ configure(subprojects.findAll {it.name != "SpongeAPI" && it.name != "EverPlugins
 			name = project.name
 			organization = project.organization
 			url = project.url
-		}
-	}
-	
-	sponge {
-		plugin {
-			meta {
-				id = "$project.group.$project.name"
-				name = project.name
-				version = project.version
-			}
 		}
 	}
 }
@@ -189,7 +178,7 @@ project(':EverAPI') {
 	}*/
 }
 
-// Include Javax
+// Include JavaX
 project(':EverMails') {
 	apply plugin: 'com.github.johnrengelman.shadow'
 	configurations {
