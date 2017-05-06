@@ -14,8 +14,8 @@ plugins {
 }
 
 // Arguments :
-ext.plugin_version = "0.1.4"
-ext.spongeapi_version = "6.0.0"
+ext.plugin_version = "0.1.5"
+ext.spongeapi_version = "7.0.0"
 ext.everplugins = project
 
 version = "S" + ext.spongeapi_version + "-R"  + ext.plugin_version + "-BETA"
