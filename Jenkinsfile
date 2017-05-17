@@ -9,6 +9,7 @@ node {
 	
 	stage('Stage Build') {
 		echo "My branch is : ${env.BRANCH_NAME}"
+		sh "chmod +x gradlew"
 		sh "./gradlew clean build shadowJar zip -PBUILD_NUMBER=${env.BUILD_NUMBER}"
 	}
 
