@@ -102,7 +102,17 @@ configure(subprojects.findAll {it.name != "EverAPI" && it.name != "SpongeAPI"}) 
 project(':EverAPI') {
 	apply plugin: 'com.jfrog.artifactory'
 	
+	repositories {
+		mavenCentral()
+		maven {
+			name = 'sponge'
+			url = 'http://maven.sk89q.com/artifactory/repo'
+		}
+	}
+	
 	dependencies {
+		compile "com.sk89q.worldedit:worldedit-sponge:6.1.7-SNAPSHOT"
+		compile "com.sk89q.worldedit:worldedit-core:6.1.4-SNAPSHOT"
 		compile "io.netty:netty-all:4.0.23.Final"
 	}
 	
