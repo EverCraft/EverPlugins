@@ -1,5 +1,5 @@
 node {
-	def server = Artifactory.server SERVER_ID
+	def server = Artifactory.server "EverCraft"
 	def downloadSpec = """{
 	 "files": [
 	    {
