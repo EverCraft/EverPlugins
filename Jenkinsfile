@@ -1,4 +1,14 @@
 node {
+	def server = Artifactory.server "EverCraft"
+	def downloadSpec = """{
+	 "files": [
+	    {
+	      "pattern": "build/plugins/*.jar",
+	      "target": "evercraft-repo/"
+	    }
+	 ]
+	}"""
+	
 	currentBuild.displayName = "EverPlugins #${env.BUILD_NUMBER} - SpongeAPI 7.0.0"
 	currentBuild.description = "For SpongeAPI 7.0.0"
 	
@@ -14,7 +24,10 @@ node {
 	}
 
 	stage('Stage Upload') {
-	    archive 'build/plugins/*.jar'
+		archive 'build/plugins/*.jar'
 		archive 'build/plugins/*.zip'
 	}
+	
+	def buildInfo2 = server.upload(uploadSpec)
+	server.publishBuildInfo(buildInfo2)
 }
