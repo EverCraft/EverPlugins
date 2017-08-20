@@ -1,12 +1,3 @@
-buildscript {
-  repositories {
-	jcenter()
-	dependencies {
-	  classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.+')
-	}
-  }
-}
-
 plugins {
 	id "com.github.johnrengelman.shadow" version "1.2.3"
 	id 'net.minecrell.licenser' version '0.3'
@@ -14,22 +5,11 @@ plugins {
 }
 
 // Arguments :
-ext.plugin_version = "0.1.5"
-ext.spongeapi_version = "7.0.0"
 ext.everplugins = project
 
-version = "S" + ext.spongeapi_version + "-R"  + ext.plugin_version + "-BETA"
-if (project.hasProperty("BUILD_NUMBER")) {
-	version = version + '-' + project.property("BUILD_NUMBER")
-}
-
-ext.artifactory_user = "admin"
-ext.artifactory_password = ""
-if (project.hasProperty("USER")) {
-	ext.artifactory_user = project.property("USER")
-}
-if (project.hasProperty("PASSWORD")) {
-	ext.artifactory_password = project.property("PASSWORD")
+version = "S" + ext.spongeapi_version + "-R"  + plugin_version + "-BETA"
+if (project.hasProperty("build_number")) {
+	version = version + '-' + project.property("build_number")
 }
 
 allprojects {
@@ -53,7 +33,7 @@ configure(subprojects.findAll {it.name != "SpongeAPI" && it.name != "EverPlugins
 		mavenCentral()
 		maven {
 			name = 'sponge'
-			url = 'http://repo.spongepowered.org/maven'
+			url = 'https://repo.spongepowered.org/maven'
 		}
 		maven {
 			name = 'worldedit'
@@ -103,9 +83,7 @@ configure(subprojects.findAll {it.name != "EverAPI" && it.name != "SpongeAPI"}) 
 	}
 }
 
-project(':EverAPI') {
-	apply plugin: 'com.jfrog.artifactory'
-	
+project(':EverAPI') {	
 	dependencies {
 		compile "com.sk89q.worldedit:worldedit-sponge:6.1.7-SNAPSHOT"
 		compile "com.sk89q.worldedit:worldedit-core:6.1.4-SNAPSHOT"
@@ -129,49 +107,6 @@ project(':EverAPI') {
 			from(tempDir + '/' + versionFileName)
 			into(project.file(versionFile).parent)
 		}
-	}
-	
-	// jFrog
-	configurations {
-		published
-	}
-	task sourceJar(type: Jar) {
-		from sourceSets.main.allSource
-		classifier = 'sources'
-	}
-	artifactoryPublish {
-		dependsOn sourceJar
-	}
-	artifacts {
-		published sourceJar
-	}
-	artifactory {
-		contextUrl = 'http://repo.evercraft.fr/artifactory'
-		publish {
-			repository {
-				repoKey = 'Minecraft'
-				username = "${artifactory_user}"
-				password = "${artifactory_password}"
-			}
-		}
-		publish {
-			defaults {
-				publishConfigs('archives', 'published')
-				properties = ['qa.level': 'basic', 'dev.team' : 'core']
-				properties {
-					all '*:*:1.*:*@*', key1: 'val1', key2: 'val2'
-					all 'org.jfrog.*:*:1.*:*@jar*', key3: 'val3', key4: 'val4'
-				}
-		  		publishPom = true
-		  		publishIvy = false
-			}
-	  	}
-	  	resolve {
-			repository {
-			  	repoKey = 'jcenter'
-			  	maven = true	 
-			}
-	  	}
 	}
 	
 	// Event
