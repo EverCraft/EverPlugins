@@ -7,7 +7,7 @@ A minecraft plugin for Sponge platforms.
 * [Download](https://ci.evercraft.fr/job/EverCraft/job/EverPlugins/)
 * [Website](https://evercraft.fr)
 * [Documentation](https://docs.evercraft.fr)
-* [Issues](https://github.com/EverCraft/EverAPI/issues)
+* [Issues](https://github.com/EverCraft/EverPlugins/issues)
 * [Repo](https://repo.evercraft.fr/artifactory/list/gradle-release/fr/evercraft/)
 * [Support Me](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RUSKPBMNJG5R4)
 
