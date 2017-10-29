@@ -4,10 +4,11 @@ EverPlugins
 A minecraft plugin for Sponge platforms.
 
 ## Links ##
-* [Download](http://ci.evercraft.fr/job/EverCraft/job/EverPlugins/)
-* [Wiki](http://wiki.evercraft.fr)
-* [Issues](https://github.com/EverCraft/EverPlugins/issues)
-* [Website](http://evercraft.fr)
+* [Download](https://ci.evercraft.fr/job/EverCraft/job/EverPlugins/)
+* [Website](https://evercraft.fr)
+* [Documentation](https://docs.evercraft.fr)
+* [Issues](https://github.com/EverCraft/EverAPI/issues)
+* [Repo](https://repo.evercraft.fr/artifactory/list/gradle-release/fr/evercraft/)
 * [Support Me](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RUSKPBMNJG5R4)
 
 ## License ##
@@ -40,7 +41,6 @@ The following steps will ensure your project is cloned properly
 
 ## Maven Repository ##
 EverPlugins is available via a Maven repository.
-* Repo: `http://repo.evercraft.fr/artifactory/list/Minecraft/`
+* Repo: `https://repo.evercraft.fr/artifactory/list/gradle-release/`
 * Group ID: `fr.evercraft`
-* Artifact ID : `EverAPI`
 
