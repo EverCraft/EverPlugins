@@ -42,9 +42,9 @@ configure(subprojects.findAll {it.name != "SpongeAPI" && it.name != "EverPlugins
 	}
 	
 	dependencies {
-		//compile "org.spongepowered:spongeapi:" + spongeapi_version + "-SNAPSHOT"
+		compile "org.spongepowered:spongeapi:" + spongeapi_version + "-SNAPSHOT"
 		testCompile 'junit:junit:4.7'
-		compile project(':SpongeAPI')
+		//compile project(':SpongeAPI')
 	}
 	
 	jar {
