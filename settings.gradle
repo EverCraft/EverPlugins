@@ -1,10 +1,10 @@
 rootProject.name = "EverPlugins"
 
 // Optional
-include 'SpongeAPI'
+//include 'SpongeAPI'
 
 include 'EverAPI', 'EverChat', 'EverCooldowns', 'EverEconomy', 'EverEssentials', 'EverKits', 'EverInformations', 'EverMails', 'EverPermissions', 'EverPVP', 'EverSanctions', 'EverSigns', 'EverStats', 'EverWorldGuard', 'EverWorlds'
 
 //include 'Minenferia'
 
-project(':SpongeAPI').projectDir = new File( '../SpongeVanilla/SpongeCommon/SpongeAPI' )
+//project(':SpongeAPI').projectDir = new File( '../SpongeVanilla/SpongeCommon/SpongeAPI' )
